@@ -1,3 +1,13 @@
+body {
+  /* background-image: url(../public/Weather.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: auto; */
+  background-color: #32839e;
+  height: auto;
+  opacity: 0.9;
+}
+
 .App {
   text-align: center;
 }
