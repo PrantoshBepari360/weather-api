@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 const Wether = () => {
   const { userId } = useParams();
-  const API_Key = `1350afc88797bc29fc8bc833c5470489`;
+  const API_KEY = `1350afc88797bc29fc8bc833c5470489`;
 
   interface Provider {
     weather: {};
@@ -19,7 +19,7 @@ const Wether = () => {
   const [wether, setWeather] = React.useState<Provider>();
 
   useEffect(() => {
-    const url = `http://api.weatherstack.com/current?access_key=${API_Key}&query=${userId}`;
+    const url = `http://api.weatherstack.com/current?access_key=${API_KEY}&query=${userId}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setWeather(data));
