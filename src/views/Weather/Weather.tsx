@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 const Wether = () => {
   const { userId } = useParams();
-  const API_Key = `8351a7ba97afbe3c4ac84f5171a72ac9`;
+  const API_Key = `1350afc88797bc29fc8bc833c5470489`;
 
   interface Provider {
     weather: {};
