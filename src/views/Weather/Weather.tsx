@@ -19,7 +19,7 @@ const Wether = () => {
   const [wether, setWeather] = React.useState<Provider>();
 
   useEffect(() => {
-    const url = `http://api.weatherstack.com/current?access_key=${API_KEY}&query=${city}`;
+    const url = `https://api.weatherstack.com/current?access_key=${API_KEY}&query=${city}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setWeather(data));
