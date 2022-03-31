@@ -7,7 +7,7 @@ const App = () => {
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="wether/:userId" element={<Weather />} />
+        <Route path="wether/:city" element={<Weather />} />
       </Routes>
     </div>
   );

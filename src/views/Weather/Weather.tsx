@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const Wether = () => {
-  const { userId } = useParams();
-  const API_KEY = `1350afc88797bc29fc8bc833c5470489`;
+  const { city } = useParams();
+  const API_KEY = `7e56b6ad05fbcf98df44d6d905fd8d74`;
 
   interface Provider {
     weather: {};
@@ -19,11 +19,11 @@ const Wether = () => {
   const [wether, setWeather] = React.useState<Provider>();
 
   useEffect(() => {
-    const url = `http://api.weatherstack.com/current?access_key=${API_KEY}&query=${userId}`;
+    const url = `http://api.weatherstack.com/current?access_key=${API_KEY}&query=${city}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setWeather(data));
-  });
+  }, [API_KEY, city]);
 
   return (
     <div>
