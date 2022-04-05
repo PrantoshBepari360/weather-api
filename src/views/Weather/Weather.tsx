@@ -1,4 +1,4 @@
-import { Card, Container, Grid, Box, CardContent } from "@mui/material";
+import { Card, Container, Box, CardContent } from "@mui/material";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
@@ -19,7 +19,7 @@ const Wether = () => {
   const [wether, setWeather] = React.useState<Provider>();
 
   useEffect(() => {
-    const url = `https://api.weatherstack.com/current?access_key=${API_KEY}&query=${city}`;
+    const url = `http://api.weatherstack.com/current?access_key=${API_KEY}&query=${city}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setWeather(data));
@@ -27,38 +27,46 @@ const Wether = () => {
 
   return (
     <div>
-      <Box sx={{ flexGrow: 1 }}>
-        <h2 style={{ marginBottom: "30px", textAlign: "center" }}>Wether</h2>
+      <Box sx={{ flexGrow: 1, marginX: "auto" }}>
+        <h2
+          style={{ marginBottom: "30px", textAlign: "center", color: "white" }}
+        >
+          Country Wether
+        </h2>
         <Container>
-          <Grid
-            container
-            spacing={{ xs: 2, md: 3 }}
-            columns={{ xs: 4, sm: 8, md: 12 }}
+          <Card
+            sx={{ width: "80%", marginX: "auto", backgroundColor: "#e7e7e8" }}
           >
-            <Box sx={{ marginX: "auto" }}>
-              <Card sx={{ maxWidth: 345, margin: "3%" }}>
-                <CardContent sx={{ textAlign: "center" }}>
-                  Temperature: {wether?.current?.temperature}
-                </CardContent>
-                <CardContent style={{ padding: "0px" }}>
-                  <img
-                    style={{
-                      width: "350px",
-                      height: "200px",
-                    }}
-                    src={wether?.current?.weather_icons}
-                    alt="Weather icon"
-                  />
-                </CardContent>
-                <CardContent sx={{ textAlign: "center" }}>
-                  Wind speed: {wether?.current?.wind_speed}
-                </CardContent>
-                <CardContent sx={{ textAlign: "center" }}>
-                  Precip: {wether?.current?.precip}
-                </CardContent>
-              </Card>
-            </Box>
-          </Grid>
+            <CardContent
+              style={{ textAlign: "center", padding: "0px", marginTop: "30px" }}
+            >
+              <img
+                style={{ borderRadius: "5px", width: "250px", height: "150px" }}
+                src={wether?.current?.weather_icons}
+                alt="Weather icon"
+              />
+            </CardContent>
+            <CardContent
+              sx={{ textAlign: "center", fontSize: "h6.fontSize", m: 1 }}
+            >
+              {city}
+            </CardContent>
+            <CardContent
+              sx={{ textAlign: "center", fontSize: "h6.fontSize", m: 1 }}
+            >
+              Temperature: {wether?.current?.temperature} <span>‎°C</span>
+            </CardContent>
+            <CardContent
+              sx={{ textAlign: "center", fontSize: "h6.fontSize", m: 1 }}
+            >
+              Wind: {wether?.current?.wind_speed} <span>km/h</span>
+            </CardContent>
+            <CardContent
+              sx={{ textAlign: "center", fontSize: "h6.fontSize", m: 1 }}
+            >
+              Precip: {wether?.current?.precip}
+            </CardContent>
+          </Card>
         </Container>
       </Box>
     </div>
