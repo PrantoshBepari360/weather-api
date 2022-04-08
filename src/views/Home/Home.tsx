@@ -1,7 +1,32 @@
-import { Box, Button, Card, CardContent, Container, Grid } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom";
 import "../../App.css";
+import { Box, Button, Card, CardContent, Container, Grid } from "@mui/material";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import SearchIcon from "@mui/icons-material/Search";
+import MenuIcon from "@mui/icons-material/Menu";
+import { Link } from "react-router-dom";
+
+const inputStyle = {
+  width: "60%",
+  fontSize: "21px",
+  backgroundColor: "white",
+  padding: "15px",
+  margin: "0px",
+  border: "0px",
+  outline: "0px",
+};
+
+const buttonStyle = {
+  borderTop: "0px",
+  borderRight: "0px",
+  borderBottom: "0px",
+  backgroundColor: "white",
+  fontSize: "20px",
+  cursor: "pointer",
+  padding: "15px",
+  margin: "0px",
+  outline: "0px",
+};
 
 const Home = () => {
   interface Provider {
@@ -34,66 +59,90 @@ const Home = () => {
       });
   };
 
+  const enter = (e: any, country: string) => {
+    if (e.key === "Enter") {
+      if (country) {
+        searchCountryName();
+      }
+    }
+  };
+
   return (
     <div className="App">
-      <Box style={{ padding: "30px", backgroundColor: "#06add4" }}>
+      <Container sx={{ height: "320px" }}>
+        <Box
+          sx={{
+            paddingTop: "25px",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <WbSunnyIcon sx={{ color: "#e91e63" }} />{" "}
+          <span
+            style={{
+              color: "white",
+              fontSize: "24px",
+              fontWeight: "500",
+              marginLeft: "10px",
+            }}
+          >
+            WeatherStack
+          </span>
+          <MenuIcon
+            sx={{
+              marginLeft: "auto",
+              color: "black",
+              backgroundColor: "white",
+              borderRadius: "3px",
+            }}
+          />
+        </Box>
         <Box
           sx={{
             display: "flex",
             justifyContent: "center",
+            alignItems: "center",
+            paddingY: "3%",
           }}
         >
           <input
             onChange={(e) => setCountry(e.target.value)}
             value={country}
             placeholder="Enter Your Country Name"
-            // id="outlined-basic"
-            // label="Enter Your Country Name"
-            // variant="outlined"
-            style={{
-              width: "30%",
-              fontSize: "20px",
-              padding: "10px",
-              border: "0px",
-              outline: "0px",
-              borderTopLeftRadius: "5px",
-              borderBottomLeftRadius: "5px",
-            }}
+            onKeyDown={(e) => enter(e, country)}
+            style={inputStyle}
           />
           <button
             disabled={!country}
             onClick={searchCountryName}
-            // variant="contained"
-            // size="medium"
-            style={{
-              backgroundColor: "#ff7602",
-              fontSize: "20px",
-              cursor: "pointer",
-              padding: "10px",
-              border: "0px",
-              outline: "0px",
-              borderTopRightRadius: "5px",
-              borderBottomRightRadius: "5px",
-            }}
+            style={buttonStyle}
           >
-            search
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              search <SearchIcon sx={{ marginLeft: "4px" }} />
+            </Box>
           </button>
         </Box>
-        <h1 style={{ marginBottom: "30px", color: "white" }}>Country Search</h1>
-      </Box>
+        <h1 style={{ margin: "0px", color: "white" }}>Country Search</h1>
+      </Container>
 
       <Box sx={{ flexGrow: 1, paddingY: "50px" }}>
         <Container>
           {error && (
             <div
               style={{
-                backgroundColor: "Red",
+                backgroundColor: "#e91e63",
                 padding: "10px",
                 color: "white",
-                fontSize: "20px",
+                fontSize: "21px",
               }}
             >
-              Please Enter your valid country name. page not found {error}
+              Please Enter your valid country name.
             </div>
           )}
           <Grid
@@ -101,10 +150,10 @@ const Home = () => {
             spacing={{ xs: 2, md: 3 }}
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
-            {data?.length &&
-              data?.map((dt) => {
+            {data?.length > 0 &&
+              data?.map((dt, index) => {
                 return (
-                  <Box sx={{ marginX: "auto" }} key={dt.capital}>
+                  <Box sx={{ marginX: "auto" }} key={index}>
                     <Card sx={{ maxWidth: 345, margin: "3%" }}>
                       <CardContent style={{ padding: "0px" }}>
                         <img

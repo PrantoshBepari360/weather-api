@@ -26,7 +26,7 @@ const Wether = () => {
   }, [API_KEY, city]);
 
   return (
-    <div>
+    <>
       <Box sx={{ flexGrow: 1, marginX: "auto" }}>
         <h2
           style={{ marginBottom: "30px", textAlign: "center", color: "white" }}
@@ -69,7 +69,7 @@ const Wether = () => {
           </Card>
         </Container>
       </Box>
-    </div>
+    </>
   );
 };
 
