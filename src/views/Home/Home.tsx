@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../App.css";
 import { Box, Button, Card, CardContent, Container, Grid } from "@mui/material";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
@@ -45,6 +45,19 @@ const Home = () => {
   const [data, setData] = React.useState<Provider[]>([]);
   const [country, setCountry] = React.useState("");
   const [error, setErr] = React.useState("");
+
+  useEffect(() => {
+    const url = `https://restcountries.com/v3.1/name/us`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          setData(data);
+          setCountry("");
+          setErr(data.status);
+        }
+      });
+  }, []);
 
   const searchCountryName = () => {
     const url = `https://restcountries.com/v3.1/name/${country}`;
